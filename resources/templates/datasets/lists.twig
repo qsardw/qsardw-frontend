@@ -1,0 +1,99 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Dataset name</th>
+                    <th>Status</th>
+                    <th>Clean</th>
+                    <th>Duplicates</th>
+                    <th>To review</th>
+                    <th>Deleted</th>
+                    <th>Multiple</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+                {% for dataset in datasets %}
+                <tr>
+                    <td>{{ dataset.id }}</td>
+                    <td>{{ dataset.dataset_name }}</td>
+                    <td>
+                        {% if dataset.status == 0 %}
+                            Pending
+                        {% elseif dataset.status == 1 %}
+                            In proccess
+                        {% elseif dataset.status == 2 %}
+                            Clean
+                        {% elseif dataset.status == 3 %}
+                            With errors
+                        {% endif %}
+                    </td>
+                    <td>{{ dataset.clean }}</td>
+                    <td>{{ dataset.duplicated }}</td>
+                    <td>{{ dataset.toreview }}</td>
+                    <td>{{ dataset.deleted }}</td>
+                    <td>{{ dataset.multiple }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                {% if dataset.clean != 0 %}
+                                <li>
+                                    <a href="{{ path('dataset_review_clean',{id: dataset.id}) }}">
+                                        View clean <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('dataset_get_sdffile',{id: dataset.id}) }}">
+                                        Download SDF <span class="glyphicon glyphicon-cloud-download"></span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% if dataset.duplicated != 0 %}
+                                <li>
+                                    <a href="{{ path('dataset_review_discarded',{id: dataset.id}) }}">
+                                        View duplicates <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% if dataset.deleted != 0 %}
+                                <li>
+                                    <a href="{{ path('dataset_review_deleted_molecules',{id: dataset.id}) }}">
+                                        Review deleted <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                </li>
+                                {% endif %}    
+                                {% if dataset.toreview != 0 %}
+                                <li>
+                                    <a href="{{ path('dataset_review_molecules_to_review',{id: dataset.id}) }}">
+                                        Review duplicates <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% if dataset.multiple != 0 %}
+                                <li>
+                                    <a href="{{ path('dataset_review_multiple_molecules',{id: dataset.id, position: 1}) }}">
+                                        Review multiple molecules <span class="glyphicon glyphicon-eye-open"></span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{{ path('dataset_deletion_confirm',{id: dataset.id}) }}" class="btn btn-danger"{%if dataset.status == 1%} disabled="disabled"{% endif%}>
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

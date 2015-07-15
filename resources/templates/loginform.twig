@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block customcss %}<link href="css/login.css" rel="stylesheet">{% endblock %}
+{% block content %}<div class="container">
+    <form class="form-signin" role="form" action="{{ path('user_authenticate') }}" method="post">
+        <h2 class="form-signin-heading">QSARDW</h2>
+        {{ error }}
+        <input name="_username" type="text" class="form-control" placeholder="Email address" value="{{ last_username }}" required autofocus>
+        <input name="_password" type="password" class="form-control" placeholder="Password" required>
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me" name="_remember_me" /> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+{% endblock %}

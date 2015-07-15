@@ -1,0 +1,16 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Delete dataset</h1>
+                <div class="alert alert-danger">
+                    <strong>Warning!</strong> You are going to delete <strong>'{{ dataset.dataset_name }}'</strong> dataset from database. Are you sure to continue?                 
+                </div>
+                <a href="{{ path('datasets_list') }}" class="btn btn-default" role="button">No, Cancel</a>
+                <a href="{{ path('dataset_deletion',{id: dataset.id}) }}" class="btn btn-danger" role="button"> Yes, delete</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

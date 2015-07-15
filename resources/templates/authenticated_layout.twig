@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block customcss %}<link href="/css/nav-bar-fixedtop.css" rel="stylesheet">{% endblock %}
+{% block navigationbar %}
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">QSARDW</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Datasets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('sdf_form') }}">Create from SDF file</a></li>
+                        <li><a href="{{ path('csv_form') }}">Create from CSV with names</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('datasets_list') }}">List datasets</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('user_profile') }}">Profile</a></li>
+                <li><a href="{{ path('user_logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock navigationbar %}

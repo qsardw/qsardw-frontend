@@ -1,0 +1,53 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>{{ dataset.datasetName }}</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <strong>Status</strong>: 
+
+                    </li>
+                    {% for moleculeCount in processedMoleculesCount %}
+                        <li>
+                            {% if moleculeCount.processed_status == 1%}
+                                <a href="{{ path('dataset_review_clean',{id: dataset.id}) }}">Clean molecules <span class="badge pull-right">{{ moleculeCount.num_molecules }}</span></a>
+                                {% elseif moleculeCount.processed_status == 2%}
+                                <a href="{{ path('dataset_review_discarded', {id: dataset.id}) }}">Discarded molecules <span class="badge pull-right">{{ moleculeCount.num_molecules }}</span></a>
+                                {% elseif moleculeCount.processed_status == 3%}
+                                <a href="{{ path('dataset_review_molecules_to_review', {id: dataset.id}) }}">Molecules To review <span class="badge pull-right">{{ moleculeCount.num_molecules }}</span></a>
+                                {% elseif moleculeCount.processed_status == 4%}
+                                <a href="{{ path('dataset_review_deleted_molecules', {id: dataset.id}) }}">Deleted molecules <span class="badge pull-right">{{ moleculeCount.num_molecules }}</span></a>
+                                {% endif %}
+
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped table-condensed">
+                            <tr>
+                                <td><strong>Status</strong></td>
+                                <td>
+                                    {% if dataset.status == 0 %}
+                                    pending
+                                    {% elseif dataset.status == 1 %}
+                                    in cleaning process
+                                    {% elseif dataset.status == 2 %}
+                                    clean
+                                    {% elseif dataset.status == 3 %}
+                                    errors
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

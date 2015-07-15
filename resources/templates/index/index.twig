@@ -1,0 +1,39 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Hi! {{ user.complete_name }}</h3>
+                </div>
+                <div class="panel-body">
+                    <a href="{{ path('user_profile') }}" class="thumbnail">
+                        <img data-src="holder.js/100%x200" src="{{ user.photo }}" alt="{{ user.complete_name}}">
+                    </a>
+
+                    <p>Your datasets summary:</p>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Clean <span class="badge badge-important">{{ clean_datasets }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Pending to clean <span class="badge badge-important">{{ pending_datasets }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        In cleaning process <span class="badge badge-important">{{ cleaning_datasets }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        Cleaning failed <span class="badge badge-important">{{ error_datasets }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h2>Recent activity</h2>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<div class="container">
+    <h1><span class="label label-danger">Error: {{ message }}</span></h1>
+    {% if exceptionMessage is defined %}
+    <div class="alert alert-danger">{{ exceptionMessage }}</div>
+    {% endif %}
+    
+</div>
+{% endblock content %}
+

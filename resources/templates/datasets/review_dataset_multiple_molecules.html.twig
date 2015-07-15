@@ -1,0 +1,85 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ dataset.datasetName }}</h2>
+                <h3>Multiple molecules: <span id="currentGroupLabel">{{ currentPosition }}</span> / {{ totalGroups }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="pager">
+                    
+                    {% if currentPosition == 1 %}
+                        <li class="previous disabled" id="prevGroup"><a href="#">&larr; Previous</a></li>
+                    {% else %}
+                        {% set prevPosition = currentPosition - 1 %}
+                        <li class="previous" id="prevGroup">
+                            <a href="{{ path('dataset_review_multiple_molecules',{id: dataset.id, position: prevPosition}) }}">&larr; Previous</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% if lastPosition == true and groups|length > 1 %}
+                        <li class="next disabled" id="nextGroup"><a href="#">Next &rarr;</a></li>
+                    {% else %}
+                        <li class="next" id="nextGroup">
+                            {% set nextPosition = currentPosition + 1 %}
+                            <a href="{{ path('dataset_review_multiple_molecules',{id: dataset.id, position: nextPosition}) }}">Next &rarr;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>    
+        {% for molecule in currentGroup['molecules'] %}    
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>InchiKey:</strong> {{ molecule['inchiKey'] }}</li>
+                    <li class="list-group-item"><strong>Smile:</strong> {{ molecule['smile'] }}</li>
+                    <div class="well">
+                        <a class="btn btn-primary btn-block" href="{{ path('dataset_clean_molecule', {id: dataset.id, moleculeId: molecule.id, position: currentPosition}) }}">Add to dataset</a>
+                    </div>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img id="molinfoImage" width="100%" src="/data/images/{{ dataset.id }}/molecule_{{ molecule.id }}.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}        
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        /**
+         * Current Dataset Id
+         * @param int
+         */
+        var currentDataset = {{ dataset.id }}
+        /**
+         * Total groups
+         * @type int
+         */
+        var totalGroups = {{ totalGroups }};
+        /**
+         * ID of the current group
+         * @type int
+         */
+        var currentGroup = {{ groups[0].id }};
+        /**
+         * IDs of the clean molecules
+         * @type Array
+         */
+        var groupIds = [{{ groupIds }}];
+        
+        $(document).ready(function() {
+        });
+    </script>
+    <script type="text/javascript" src="/js/app/review_groups.js"></script>
+{% endblock javascript %}

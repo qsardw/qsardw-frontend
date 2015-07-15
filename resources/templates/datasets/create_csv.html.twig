@@ -1,0 +1,51 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Create new dataset from a CSV File</h1>
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="datasetName">Dataset name</label>
+                        <input type="text" class="form-control" id="datasetName" name="dataset_name" placeholder="Enter dataset name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetDescription">Description</label>
+                        <textarea id="datasetDescription" class="form-control" rows="3" placeholder="Enter description" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetMultipleMolecules">Multiple Molecules Strategy</label>
+                        <select class="form-control" id="datasetMultipleMolecules" name="multiple_molecules_strategy">
+                            {% for strategy in multipleMoleculesStrategies %}
+                                <option value="{{ strategy.id }}">{{ strategy.strategy_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetDuplicatedMolecules">Duplicated Molecules Strategy</label>
+                        <select class="form-control" id="datasetDuplicatedMolecules" name="on_duplicates_strategy">
+                            {% for strategy in duplicatedMoleculesStrategies %}
+                                <option value="{{ strategy.id }}">{{ strategy.strategy_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetVisibility">Dataset Visibility</label>
+                        <select class="form-control" id="datasetVisibility" name="visibility">
+                            {% for visibility in objectsVisibility %}
+                                <option value="{{ visibility.id }}">{{ visibility.visibility_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datasetFile">CSV File</label>
+                        <input type="file" id="datasetFile" name="csv_file" accept="*.csv"/>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enqueue Dataset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

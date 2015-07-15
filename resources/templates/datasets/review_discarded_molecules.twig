@@ -1,0 +1,96 @@
+{% extends "authenticated_layout.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>{{ dataset.datasetName }}</h2>
+                <h3>Discarded molecules: {{ totalMolecules }}</h3>
+                <hr/>
+                <h4>Actions:</h4>
+                <div class="list-group">
+                    <a href="#" class="list-group-item" id="flagClean">Move to Dataset</a>
+                    <a href="#" class="list-group-item" id="viewDuplicates">View Duplicates</a>
+                </div>
+            </div>
+            <div class="col-md-8">        
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img id="molinfoImage" width="100%" src="/data/images/{{ molecules[0].dataset }}/molecule_{{ molecules[0].id }}.png" />
+                    </div>
+                </div>         
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="pager">
+                    <li class="previous" id="prevMolecule"><a href="#">&larr; Previous</a></li>
+                    <li class="next" id="nextMolecule"><a href="#">Next &rarr;</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">              
+                <table class="table table-condensed table-striped">
+                    <tr>
+                        <td><strong>Smile</strong></td>
+                        <td id="molinfoSmile">{{ molecules[0].smile }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inchi</strong></td>
+                        <td id="molinfoInchi">{{ molecules[0].inchi }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inchi Key</strong></td>
+                        <td id="molinfoInchiKey">{{ molecules[0].inchiKey }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Source ID</strong></td>
+                        <td id="molinfoSourceId">{{ molecules[0].sourceId }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chemistry name</strong></td>
+                        <td id="molinfoSourceName">{{ molecules[0].sourceName }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Publication</strong></td>
+                        <td id="molinfoSourcePublication">{{ molecules[0].sourcePublication }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        /**
+         * Total molecules
+         * @type int
+         */
+        var totalMolecules = {{ totalMolecules }};
+        /**
+         * ID of the current Molecule
+         * @type int
+         */
+        var currentMolecule = {{ molecules[0].id }};
+        /**
+         * IDs of the clean molecules
+         * @type Array
+         */
+        var moleculeIds = [{{ moleculeIds }}];
+        $(document).ready(function() {
+            $('#nextMolecule').click(loadNextMolecule);
+            $('#prevMolecule').click(loadPrevMolecule);
+            $('#flagClean').click(flagAsCleanMolecule);
+            $('#viewDuplicates').click(openViewDuplicatesPage);
+        });
+    </script>
+    <script type="text/javascript" src="/js/app/review_molecules.js"></script>
+{% endblock %}

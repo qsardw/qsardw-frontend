@@ -1,0 +1,28 @@
+{
+    "name": "uvigo/qsardw-backend",
+    "description": "Backend for QSARDW",
+    "authors": [
+        {
+            "name": "Javier Caride Ulloa",
+            "email": "javier.caride@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "silex/silex": "@stable",
+        "silex/web-profiler": "@stable",
+        "symfony/monolog-bridge": "@stable",
+        "symfony/validator": "@stable",
+        "symfony/security": "@stable",
+        "symfony/twig-bridge": "@stable",
+        "twig/twig": "@stable",
+        "monolog/monolog": "@stable",
+        "doctrine/dbal": "@stable",
+        "guzzlehttp/guzzle": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Qsardw": "src/"
+        }
+    }
+}
