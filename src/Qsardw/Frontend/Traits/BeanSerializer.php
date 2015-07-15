@@ -1,14 +1,19 @@
 <?php
-
+/*
+ * This file is part of the QSARDW Frontend project
+ *
+ * (c) Javier Caride Ulloa <javier.caride@qsardw.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Qsardw\Frontend\Traits;
 
 use Qsardw\Frontend\Application;
 use Qsardw\Frontend\Utils\String;
 
 /**
- * Description of JsonSerialize
- *
- * @author Javier Caride Ulloa <javiercaride@mobail.es>
+ * @author Javier Caride Ulloa <javier.caride@qsardw.org>
  */
 trait BeanSerializer
 {
