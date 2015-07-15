@@ -19,7 +19,6 @@ use GuzzleHttp\Client;
  */
 class QsardwApiClient
 {
-
     /**
      * HTTP Client for REST API
      * @var \GuzzleHttp\Client

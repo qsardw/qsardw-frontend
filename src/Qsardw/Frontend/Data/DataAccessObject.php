@@ -16,7 +16,6 @@ use \Doctrine\DBAL\Connection;
  */
 class DataAccessObject
 {
-
     /**
      * Database connection object
      * @var \Doctrine\DBAL\Connection

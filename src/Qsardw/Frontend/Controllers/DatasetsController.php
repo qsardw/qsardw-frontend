@@ -29,7 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DatasetsController extends BaseController
 {
-    
     /**
      * Shows the creation from from SDF File
      *
