@@ -65,6 +65,8 @@ $app->get('/login', 'login.controller:loginForm')
     ->bind('login');
 $app->get('/user/profile', 'user.controller:profile')
     ->bind('user_profile');
+$app->post('/user/profile/save', 'user.controller:saveProfile')
+    ->bind('save_user_profile');
 
 $app->error(function (\Exception $ex, $code) use ($app) {
     $app['logger']->debug($ex->getMessage());

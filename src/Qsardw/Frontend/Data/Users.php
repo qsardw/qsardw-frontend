@@ -21,6 +21,13 @@ class Users extends DataAccessObject
         parent::__construct($connection, 'users');
     }
 
+    /**
+     * Retrieves the user bean by its id
+     *
+     * @param $id
+     * @return mixed
+     * @throws Exceptions\QueryExecutionError
+     */
     public function getUser($id)
     {
         $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
@@ -29,5 +36,20 @@ class Users extends DataAccessObject
         );
 
         return $this->executeQueryAndReturnRow($sql, $params);
+    }
+
+    /**
+     * Updates the user bean
+     *
+     * @param array $params
+     * @return bool
+     * @throws Exceptions\QueryExecutionError
+     */
+    public function updateUser(array $params)
+    {
+        $id = $params['id'];
+        unset($params['id']);
+
+        return $this->executeUpdate($params, $id);
     }
 }

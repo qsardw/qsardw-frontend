@@ -11,6 +11,7 @@
 namespace Qsardw\Frontend\Controllers;
 
 use Qsardw\Frontend\Application;
+use Qsardw\Frontend\Security\User;
 
 /**
  * Base controller for the Web Application
@@ -32,12 +33,12 @@ class BaseController
      * Returns the authenticated user
      *
      * @param Application $app
-     * @return mixed
+     * @return User
      * @throws \Exception
      */
     protected function getAuthenticatedUser(Application $app)
     {
-        $securityToken = $app['security']->getToken();
+        $securityToken = $app['security.token_storage']->getToken();
         if (null !== $securityToken) {
             return $securityToken->getUser();
         } else {

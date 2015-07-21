@@ -49,9 +49,11 @@ class UserProvider implements UserProviderInterface
             $user['username'],
             $user['password'],
             $roles,
+            $user['user_group'],
             true,
             true,
-            true, true
+            true,
+            true
         );
         
         return $user;

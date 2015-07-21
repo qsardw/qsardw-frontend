@@ -28,12 +28,14 @@ final class User implements AdvancedUserInterface
     private $credentialsNonExpired;
     private $accountNonLocked;
     private $roles;
+    private $userGroup;
     
     public function __construct(
         $id,
         $username,
         $password,
         array $roles = array(),
+        $userGroup,
         $enabled = true,
         $userNonExpired = true,
         $credentialsNonExpired = true,
@@ -50,6 +52,7 @@ final class User implements AdvancedUserInterface
         $this->credentialsNonExpired = $credentialsNonExpired;
         $this->accountNonLocked = $userNonLocked;
         $this->roles = $roles;
+        $this->userGroup = $userGroup;
     }
     
     /**

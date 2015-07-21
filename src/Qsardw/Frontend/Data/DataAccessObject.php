@@ -78,7 +78,8 @@ class DataAccessObject
      * Executes an insert into the database
      *
      * @param array $insertData
-     * @throws \Qsardw\Frontend\Data\Exception
+     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Exception
      */
     public function executeInsert(array $insertData)
     {
@@ -86,7 +87,7 @@ class DataAccessObject
         try {
             $this->connection->insert($this->table, $insertData);
             $this->connection->commit();
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             $this->connection->rollback();
             throw $exception;
         }
@@ -157,6 +158,31 @@ class DataAccessObject
             return $sqlStatement->fetch();
         } else {
             throw new Exceptions\QueryExecutionError($sql);
+        }
+    }
+
+    /**
+     * Executes an insert into the database
+     *
+     * @param array $updateData
+     * @param $id
+     * @return int
+     * @throws Exception
+     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Exception
+     */
+    public function executeUpdate(array $updateData, $id)
+    {
+        $this->connection->beginTransaction();
+        try {
+            $primaryKey = ['id' => $id];
+            $rows = $this->connection->update($this->table, $updateData, $primaryKey);
+            $this->connection->commit();
+
+            return $rows;
+        } catch (\Exception $exception) {
+            $this->connection->rollback();
+            throw $exception;
         }
     }
 }
