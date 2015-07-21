@@ -13,8 +13,8 @@ $app['debug'] = true;
 $app['database.config'] = [
     'unix_socket'=> '/var/run/mysqld/mysqld.sock',
     'dbname'=> 'qsardw',
-    'user'=> 'your_user_here',
-    'password'=> 'your_password_here',
+    'user'=> 'root',
+    'password'=> 'd3s4rr0ll0',
     'driver'=> 'pdo_mysql',
     'charset'=> 'UTF8'
 ];
