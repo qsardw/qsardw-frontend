@@ -29,7 +29,15 @@ class Dataset extends DataAccessObject
      */
     public function listByOwner($owner)
     {
-        $sql = "SELECT * FROM {$this->getTable()} WHERE owner = :owner ORDER BY id ASC";
+        $sql = "SELECT dt.*,u.complete_name AS 'owner_name' FROM dataset dt, users u
+            WHERE dt.owner = :owner AND u.id = dt.owner
+          UNION
+          SELECT dt.*,u.complete_name AS 'owner_name' FROM dataset dt, users u
+            WHERE dt.visibility = 2 AND dt.owner <> :owner AND u.id = dt.owner AND u.user_group = 1
+          UNION
+          SELECT dt.*,u.complete_name AS 'owner_name' FROM dataset dt, users u
+          WHERE dt.visibility = 3 AND dt.owner <> :owner AND u.id = dt.owner;";
+
         $params = array(
             'owner' => $owner
         );

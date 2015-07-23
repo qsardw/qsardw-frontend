@@ -8,6 +8,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Dataset name</th>
+                    <th>Owner</th>
                     <th>Status</th>
                     <th>Clean</th>
                     <th>Duplicates</th>
@@ -20,6 +21,7 @@
                 <tr>
                     <td>{{ dataset.id }}</td>
                     <td>{{ dataset.dataset_name }}</td>
+                    <td>{% if dataset.owner == owner %}You{% else %}{{ dataset.owner_name }}{% endif %}</td>
                     <td>
                         {% if dataset.status == 0 %}
                             Pending
@@ -86,7 +88,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="{{ path('dataset_deletion_confirm',{id: dataset.id}) }}" class="btn btn-danger"{%if dataset.status == 1%} disabled="disabled"{% endif%}>
+                        <a href="{{ path('dataset_deletion_confirm',{id: dataset.id}) }}" class="btn btn-danger"{%if dataset.status == 1 or dataset.owner != owner%} disabled="disabled"{% endif%}>
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>

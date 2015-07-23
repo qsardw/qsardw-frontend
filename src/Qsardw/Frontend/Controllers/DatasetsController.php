@@ -154,7 +154,8 @@ class DatasetsController extends BaseController
         }
         
         $templateData = array(
-            'datasets' => $datasetsList
+            'datasets' => $datasetsList,
+            'owner' => $this->getAuthenticatedUser($app)->getId()
         );
         
         return $app->twig()->render(

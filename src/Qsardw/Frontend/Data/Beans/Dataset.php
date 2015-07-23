@@ -93,7 +93,12 @@ class Dataset
      * @var int
      */
     protected $onDuplicatesStrategy;
-    
+
+    /**
+     * Name of the owner
+     * @var string
+     */
+    protected $ownerName;
     /**
      * Status of the dataset
      * @var int
@@ -112,7 +117,7 @@ class Dataset
      * @var \DateTime
      */
     protected $ts;
-    
+
     public function getId()
     {
         return $this->id;
@@ -156,6 +161,11 @@ class Dataset
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    public function getOwnerName()
+    {
+        return $this->ownerName;
     }
 
     public function getCreatedOn()
@@ -252,6 +262,14 @@ class Dataset
     {
         $this->multipleMoleculesStrategy = intval($multipleMoleculesStrategy);
         return $this;
+    }
+
+    /**
+     * @param string $ownerName
+     */
+    public function setOwnerName($ownerName)
+    {
+        $this->ownerName = $ownerName;
     }
 
     public function setOnDuplicatesStrategy($onDuplicatesStrategy)
