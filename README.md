@@ -94,3 +94,8 @@ You should change the values of **user** and **password** properties with values
 sudo a2ensite qsardw.conf
 sudo service apache2 reload
 ```
+
+
+### Install java services and daemons
+
+See [qsardw-backend](https://github.com/qsardw/qsardw-backend) project to install backend services and job scheduler
