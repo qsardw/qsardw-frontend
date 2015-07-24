@@ -94,6 +94,7 @@ class DatasetsController extends BaseController
         $dataset->setFileType(FileTypes::SDF_FILE);
         
         $datasetRow = $dataset->toRow();
+        unset($datasetRow['owner_name']);
         
         $datasetDao = new DatasetDao($app['db']);
         $datasetDao->save($datasetRow);
@@ -126,6 +127,7 @@ class DatasetsController extends BaseController
         $dataset->setFileType(FileTypes::CSV_FILE);
 
         $datasetRow = $dataset->toRow();
+        unset($datasetRow['owner_name']);
 
         $datasetDao = new DatasetDao($app['db']);
         $datasetDao->save($datasetRow);
