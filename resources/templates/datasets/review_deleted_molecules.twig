@@ -5,13 +5,12 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>{{ dataset.datasetName }}</h2>
-                <h3>Discarded molecules: {{ totalMolecules }}</h3>
+                <h3>Deleted molecules: {{ totalMolecules }}</h3>
                 <h4 id="currentMoleculeIdx">Reviewing 1 of {{ totalMolecules }}</h4>
                 <hr/>
                 <h4>Actions:</h4>
                 <div class="list-group">
                     <a href="#" class="list-group-item" id="flagClean">Move to Dataset</a>
-                    <a href="#" class="list-group-item" id="viewDuplicates">View Duplicates</a>
                 </div>
             </div>
             <div class="col-md-8">        
@@ -90,7 +89,6 @@
             $('#nextMolecule').click(loadNextMolecule);
             $('#prevMolecule').click(loadPrevMolecule);
             $('#flagClean').click(flagAsCleanMolecule);
-            $('#viewDuplicates').click(openViewDuplicatesPage);
         });
     </script>
     <script type="text/javascript" src="/js/app/review_molecules.js"></script>

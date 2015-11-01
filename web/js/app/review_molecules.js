@@ -177,12 +177,15 @@ var doFlagMolecule = function(data, statusToCheck) {
 }; 
 
 var drawMoleculeData = function(data) {
+    var currentIndex = moleculeIds.indexOf(currentMolecule) + 1;
+
     $('#molinfoSmile').html(data.smile);
     $('#molinfoInchi').html(data.inchi);
     $('#molinfoInchiKey').html(data.inchiKey);
     $('#molinfoSourceId').html(data.sourceId);
     $('#molinfoSourceName').html(data.sourceName);
     $('#molinfoSourcePublication').html(data.sourcePublication);
+    $('#currentMoleculeIdx').html('Reviewing ' + currentIndex + ' of ' + totalMolecules);
     
     var imageSrc = '/data/images/'+ data.dataset + '/molecule_'+ data.id +'.png';
     $('#molinfoImage').attr('src',imageSrc);

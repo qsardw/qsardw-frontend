@@ -33,6 +33,12 @@ class DatasetMolecules extends QsardwApiClient
         $url = $this->getBaseEndpoint() . "dataset/{$dataset}/discardedmolecules";
         return $this->callAndGetCollection($url, $limit, $offset);
     }
+
+    public function getDatasetDeletedMolecules($dataset, $limit = null, $offset = null)
+    {
+        $url = $this->getBaseEndpoint() . "dataset/{$dataset}/deletedmolecules";
+        return $this->callAndGetCollection($url, $limit, $offset);
+    }
     
     public function getDatasetMoleculesToReview($dataset, $limit = null, $offset = null)
     {

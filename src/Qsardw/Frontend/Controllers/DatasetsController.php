@@ -240,6 +240,30 @@ class DatasetsController extends BaseController
             )
         );
     }
+
+    public function reviewDatasetDeletedMolecules(Application $app, $id)
+    {
+        $apiClient = new DatasetMolecules();
+        $deletedMolecules = $apiClient->getDatasetDeletedMolecules($id);
+
+        $datasetDao = new DatasetDao($app['db']);
+        $datasetData = $datasetDao->read($id);
+
+        $moleculeIds = array();
+        foreach ($deletedMolecules['molecules'] as $cleanMolecule) {
+            $moleculeIds[] = $cleanMolecule['id'];
+        }
+
+        return $app->twig()->render(
+            'datasets/review_deleted_molecules.twig',
+            array(
+                'dataset' => $datasetData,
+                'molecules' => $deletedMolecules['molecules'],
+                'moleculeIds' => implode(', ', $moleculeIds),
+                'totalMolecules' => $deletedMolecules['totalMolecules']
+            )
+        );
+    }
     
     public function reviewDatasetMoleculesToReview(Application $app, $id)
     {
@@ -337,7 +361,7 @@ class DatasetsController extends BaseController
         foreach ($duplicatedMolecules['molecules'] as $duplicatedMolecule) {
             $moleculeIds[] = $duplicatedMolecule['id'];
         }
-        
+
         return $app->twig()->render(
             'datasets/review_dataset_inchikey_duplicates.twig',
             array(

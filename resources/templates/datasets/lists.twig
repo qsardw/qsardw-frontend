@@ -66,21 +66,21 @@
                                 {% if dataset.deleted != 0 %}
                                 <li>
                                     <a href="{{ path('dataset_review_deleted_molecules',{id: dataset.id}) }}">
-                                        Review deleted <span class="glyphicon glyphicon-eye-open"></span>
+                                        View deleted <span class="glyphicon glyphicon-eye-open"></span>
                                     </a>
                                 </li>
                                 {% endif %}    
                                 {% if dataset.toreview != 0 %}
                                 <li>
                                     <a href="{{ path('dataset_review_molecules_to_review',{id: dataset.id}) }}">
-                                        Review duplicates <span class="glyphicon glyphicon-eye-open"></span>
+                                        View molecules to review <span class="glyphicon glyphicon-eye-open"></span>
                                     </a>
                                 </li>
                                 {% endif %}
                                 {% if dataset.multiple != 0 %}
                                 <li>
                                     <a href="{{ path('dataset_review_multiple_molecules',{id: dataset.id, position: 1}) }}">
-                                        Review multiple molecules <span class="glyphicon glyphicon-eye-open"></span>
+                                        View multiple molecules <span class="glyphicon glyphicon-eye-open"></span>
                                     </a>
                                 </li>
                                 {% endif %}

@@ -55,7 +55,7 @@ $app->get('/datasets/review/{id}/multiple/{position}', 'datasets.controller:revi
     ->bind('dataset_review_multiple_molecules');
 $app->get('/datasets/review/{id}/clean/{moleculeId}/{position}', 'datasets.controller:cleanMolecule')
     ->bind('dataset_clean_molecule');
-$app->get('/datasets/review/{id}/deleted', 'datasets.controller:reviewDatasetDeleted')
+$app->get('/datasets/review/{id}/deleted', 'datasets.controller:reviewDatasetDeletedMolecules')
     ->bind('dataset_review_deleted_molecules');
 $app->get('/datasets/review/{id}/duplicates/{inchiKey}', 'datasets.controller:reviewDatasetInchiKeyDuplicates')
     ->bind('dataset_review_dataset_duplicates');

@@ -6,7 +6,8 @@
             <div class="col-md-4">
                 <h2>{{ dataset.datasetName }}</h2>
                 <h3>Clean molecules: {{ totalMolecules }}</h3>
-                                <hr/>
+                <h4 id="currentMoleculeIdx">Reviewing 1 of {{ totalMolecules }}</h4>
+                <hr/>
                 <h4>Actions:</h4>
                 <div class="list-group">
                     {% if molecules[0].isDuplicated == false %}
@@ -99,6 +100,7 @@
             $('#prevMolecule').click(loadPrevCleanMolecule);
             $('#flagDuplicate').click(flagAsDuplicateMolecule);
             $('#removeFromDataset').click(flagAsDeletedMolecule);
+            $('#viewDuplicates').click(openViewDuplicatesPage);
         });
     </script>
     <script type="text/javascript" src="/js/app/review_molecules.js"></script>
